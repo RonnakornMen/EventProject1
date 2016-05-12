@@ -26,6 +26,7 @@ public class Gauge   {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
+    static int num;
 
 
     public enum State {
@@ -37,21 +38,37 @@ public class Gauge   {
     private int offset = 0;
 
 
+
     public Gauge(final float x, final float y){
+        /*PlayN.keyboard().setListener(new Keyboard.Adapter(){
+            @Override
+            public void onKeyDown(Keyboard.Event event){
+
+               if (event.key() == Key.ENTER) {
+                    switch (state){
+                        System.out.println("ss");
+                    }
+                }
+
+            }
+
+
+        });*/
         
 
         sprite = SpriteLoader.getSprite("images/gauge/gauge.json");
-        sprite.addCallback(new Callback<Sprite>(){
+        sprite.addCallback(new Callback<Sprite>() {
             @Override
-            public void onSuccess(Sprite result){
+            public void onSuccess(Sprite result) {
                 sprite.setSprite(spriteIndex);
-                sprite.layer().setOrigin(sprite.width() /2f,
-                                         sprite.height() /2f);
+                sprite.layer().setOrigin(sprite.width() / 2f,
+                        sprite.height() / 2f);
                 sprite.layer().setTranslation(200, 200);
                 hasLoaded = true;
             }
+
             @Override
-            public void onFailure(Throwable cause){
+            public void onFailure(Throwable cause) {
                 PlayN.log().error("Error loading image!", cause);
             }
 
@@ -62,6 +79,11 @@ public class Gauge   {
         return sprite.layer();
     }
 
+    public static void power(int n){
+        num = n;
+
+    }
+
    public void update(int delta) {
         if (hasLoaded == false) return;
         e = e +delta;
@@ -70,11 +92,17 @@ public class Gauge   {
                 case IDLE: offset =0; break;
             
             }*/
+            if(num==-99){
+                System.out.println(spriteIndex);
+                spriteIndex =0;
+                num=0;
+            }
         
             spriteIndex = offset + ((spriteIndex +1 ) %11);
             sprite.setSprite(spriteIndex);
             e = 0;
-            System.out.println(spriteIndex);
+
+            //System.out.println(spriteIndex);
         }
 
     }

@@ -9,6 +9,7 @@ import playn.core.ImageLayer;
 import playn.core.ImageLayer;
 import playn.core.Mouse;
 import playn.core.PlayN;
+import sut.game01.core.gauge.Gauge;
 import tripleplay.game.Screen;
 import react.UnitSlot;
 import tripleplay.game.UIScreen;
@@ -29,7 +30,7 @@ public class Mike   {
 	private float x= 60;
 	private int action = 0; 
 	private int a =0;
-
+    Gauge gauge;
 	public enum State {
 		IDLE, WALK, THROW, BACK
 	};
@@ -64,15 +65,21 @@ public class Mike   {
 						//case IDLE: state = State.WALK; break;
 						case WALK: state = State.IDLE; break;
 						case THROW: state = State.IDLE; break;
+                        //Gauge g = new Gauge(10f, 10f);
 					}
 				}
+
 			else if (event.key() == Key.ENTER) {
 					switch (state){
 						case IDLE: state = State.THROW; break;
 						case WALK: state = State.THROW; break;
 						//case THROW: state = State.IDLE; break;
+
 					}
-				}	
+
+                Gauge.power(-99);
+				}
+
 				
 			}
 
